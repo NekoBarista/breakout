@@ -89,6 +89,7 @@ def play_game():
             if ball.xcor() > bat.xcor():
                 ball.setheading(180 - ball.heading())
                 ball.setheading(360 - ball.heading())
+
             else:
                 ball.setheading(360 - ball.heading())
 
@@ -96,6 +97,7 @@ def play_game():
                 time.sleep(ball.move_speed)
                 screen.update()
                 ball.forward(10)
+
 
 
         if ball.ycor() > 300:
@@ -132,18 +134,17 @@ def play_game():
 
         for hit_brick in brick.brick_list:
             index = brick.brick_list.index(hit_brick)
-            print(ball.heading())
 
             if hit_brick.distance(ball) < 60:
                 hit_brick.goto(1000, 1000)
                 if ball.xcor() > hit_brick.xcor():
                     ball.setheading(180 - ball.heading())
-                ball.setheading(360 - ball.heading())
-                ball.forward(10)
-
+                if ball.ycor() < hit_brick.ycor():
+                    ball.setheading(360 - ball.heading())
                 time.sleep(ball.move_speed)
                 screen.update()
                 ball.forward(10)
+
                 touches +=1
                 brick.remove_brick(index)
 
